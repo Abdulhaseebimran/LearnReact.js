@@ -4,7 +4,6 @@ import { Button, Input, Select, RTE } from "../index";
 import appwriteService from "../../appwrite/conf";
 import { useNavigate } from "react-router-dom";
 import { UseSelector } from "react-redux";
-import { i } from "vite/dist/node/types.d-AKzkD8vd";
 
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
@@ -52,14 +51,13 @@ function PostForm({ post }) {
   };
 
   const slugTransform = useCallback((value) => {
-    if (value && typeof value === "string") {
+    if (value && typeof value === "string") 
       return value
         .trim()
         .toLowerCase()
         .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
       return "";
-    }
   }, []);
 
   React.useEffect(() => {
