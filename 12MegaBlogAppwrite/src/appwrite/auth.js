@@ -1,4 +1,4 @@
-import config from "../config/config.js";
+import config from "../config/config";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
@@ -6,30 +6,26 @@ export class AuthService {
   account;
   constructor() {
     this.client
-      .setEndpoint(config.appwriteUrl)
-      .setProject(config.appwriteProjectId);
+        .setEndpoint(config.appwriteUrl)
+        .setProject(config.appwriteProjectId);
     this.account = new Account(this.client);
-  }
+        
+}
  
   // create account method
-  async createAccount({ email, password, name }) {
+  async createAccount({email, password, name}) {
     try {
-      const userAccount = await this.account.create(
-        ID.unique(),
-        email,
-        password,
-        name
-      );
-      if (userAccount) {
-        // call another methods
-        return this.login({email, password});
-      } else {
-        return userAccount;
-      }
+        const userAccount = await this.account.create(ID.unique(), email, password, name);
+        if (userAccount) {
+            // call another method
+            return this.login({email, password});
+        } else {
+           return  userAccount;
+        }
     } catch (error) {
-      throw error;
+        throw error;
     }
-  }
+}
   // login method
   async login ({email, password}){
     try {
@@ -39,14 +35,24 @@ export class AuthService {
     }
   }
   // get user method
-  async getUserAccount () {
+  // async getUserAccount () {
+  //   try {
+  //       return await this.account.get();
+  //   } catch (error) {
+  //       console.log("appwrite service :: getUserAccount :: error", error);
+  //   }
+  //   return null; // ager kuch nhi howa toh null return karo
+  // }
+  async getCurrentUser() {
     try {
         return await this.account.get();
     } catch (error) {
-        console.log("appwrite service :: getUserAccount :: error", error);
+        console.log("Appwrite serive :: getCurrentUser :: error", error);
     }
-    return null; // ager kuch nhi howa toh null return karo
-  }
+
+    return null;
+}
+
   // logout method
   async logout () {
     try {

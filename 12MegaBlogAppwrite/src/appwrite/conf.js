@@ -88,16 +88,16 @@ export class Service {
   }
 
   // file upload service
-  async uploadFile(file) {
+  async uploadFile(files) {
     try {
       return await this.bucket.createFile(
         config.appwriteBucketId,
         ID.unique(),
-        file
+        files
       );
     } catch (error) {
-      console.log("appwrite service :: uploadFile :: error", error);
-      return false;
+      console.log("Appwrite serive :: uploadFile :: error", error)
+      return false
     }
   }
   async deleteFile(fileId) {
@@ -110,8 +110,8 @@ export class Service {
     }
   }
 
-  getFilesPreview(fileId){
-     return this.bucket.getFilePreview(config.appwriteBucketId, fileId);
+  getFilesPreview(fileId) {
+    return this.bucket.getFilePreview(config.appwriteBucketId, fileId);
   }
 }
 
